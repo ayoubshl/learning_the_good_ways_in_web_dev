@@ -1,40 +1,28 @@
 package management;
 
-import Interfaces.IEmployee;
 import models.employee;
-import DAO.DBemployee;
+import repository.employeeRepository;
 
-public class EmployeManager implements IEmployee {
+public class EmployeManager {
+    private final employeeRepository repository;
 
-    @Override
-    public boolean add_employee(employee employee) {
-        return DBemployee.employees_list.add(employee);
+    public EmployeManager(employeeRepository repository) {
+        this.repository = repository;
     }
 
-    @Override
-    public boolean remove_employee(employee employee) {
-        return DBemployee.employees_list.remove(employee);
+    public boolean addEmployee(employee emp) {
+        return repository.addEmployee(emp);
     }
 
-    @Override
-    public employee get_employee(int id) {
-        return DBemployee.employees_list.get(id);
+    public boolean removeEmployee(employee emp) {
+        return repository.removeEmployee(emp);
     }
 
-    @Override
-    public employee edit_employee(employee employee) {
-        int id = employee.getEmployee_id();
-        return DBemployee.employees_list.set(id , employee);
-
-    }
-    @Override
-    public employee find_Employee_by_id(int id) {
-        for (employee e : DBemployee.employees_list) {
-            if (e.getEmployee_id() == id) {
-                return e;
-            }
-        }
-        return null;
+    public employee findEmployeeById(int id) {
+        return repository.findEmployeeById(id);
     }
 
+    public employee editEmployee(employee emp) {
+        return repository.updateEmployee(emp);
+    }
 }

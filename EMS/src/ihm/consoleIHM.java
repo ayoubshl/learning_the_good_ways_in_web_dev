@@ -63,17 +63,17 @@ public class consoleIHM {
         String email = scanner.nextLine();
 
         employee newEmployee = new employee(id, name, address, phone, email);
-        boolean result = employeeManager.add_employee(newEmployee);
+        boolean result = employeeManager.addEmployee(newEmployee);
         System.out.println(result ? "Employee added successfully." : "Failed to add employee.");
     }
 
     private void removeEmployee() {
         System.out.println("Enter Employee ID to remove:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
-            boolean result = employeeManager.remove_employee(emp);
+            boolean result = employeeManager.removeEmployee(emp);
             System.out.println(result ? "Employee removed successfully." : "Failed to remove employee.");
         } else {
             System.out.println("Employee not found.");
@@ -83,7 +83,7 @@ public class consoleIHM {
     private void editEmployee() {
         System.out.println("Enter Employee ID to edit:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
             System.out.println("Enter New Address:");
@@ -97,7 +97,7 @@ public class consoleIHM {
             emp.setPhone(phone);
             emp.setEmail(email);
 
-            employee updatedEmployee = employeeManager.edit_employee(emp);
+            employee updatedEmployee = employeeManager.editEmployee(emp);
             System.out.println(updatedEmployee != null ? "Employee updated successfully." : "Failed to update employee.");
         } else {
             System.out.println("Employee not found.");
@@ -107,7 +107,7 @@ public class consoleIHM {
     private void viewEmployeeDetails() {
         System.out.println("Enter Employee ID to view:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
             System.out.println("Employee Details:");
@@ -124,7 +124,7 @@ public class consoleIHM {
     private void addReward() {
         System.out.println("Enter Employee ID to add reward:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
             System.out.println("Enter Reward Amount:");
@@ -132,7 +132,7 @@ public class consoleIHM {
             System.out.println("Enter Date (YYYY-MM-DD):");
             String date = scanner.nextLine();
 
-            boolean result = salaryManager.add_reward(emp, reward, date);
+            boolean result = salaryManager.addReward(emp, reward, date);
             System.out.println(result ? "Reward added successfully." : "Failed to add reward.");
         } else {
             System.out.println("Employee not found.");
@@ -142,7 +142,7 @@ public class consoleIHM {
     private void applyPenalty() {
         System.out.println("Enter Employee ID to apply penalty:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
             System.out.println("Enter Penalty Amount:");
@@ -150,7 +150,7 @@ public class consoleIHM {
             System.out.println("Enter Date (YYYY-MM-DD):");
             String date = scanner.nextLine();
 
-            boolean result = salaryManager.apply_penalty(emp, penalty, date);
+            boolean result = salaryManager.applyPenalty(emp, penalty, date);
             System.out.println(result ? "Penalty applied successfully." : "Failed to apply penalty.");
         } else {
             System.out.println("Employee not found.");
@@ -160,10 +160,10 @@ public class consoleIHM {
     private void viewTotalNetSalary() {
         System.out.println("Enter Employee ID to view net salary:");
         int id = Integer.parseInt(scanner.nextLine());
-        employee emp = employeeManager.find_Employee_by_id(id);
+        employee emp = employeeManager.findEmployeeById(id);
 
         if (emp != null) {
-            float netSalary = salaryManager.get_total_net_salary(emp);
+            float netSalary = salaryManager.getTotalNetSalary(emp);
             System.out.println("Total Net Salary: " + netSalary);
         } else {
             System.out.println("Employee not found.");
