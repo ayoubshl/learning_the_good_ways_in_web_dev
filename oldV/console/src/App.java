@@ -1,13 +1,16 @@
 import DB.employeDB;          // For employee database
 import entities.employe;      // For the employee entity
-import java.util.Scanner; // For employee management functionality
+import entities.ficheSalaire; // For the salary entity
 import management.*;
+import java.util.Scanner; // For employee management functionality
+
 public class App {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             employeManagement empManager = new employeManagement();
+            salaryManagement salaryManager = new salaryManagement();
             
-            System.out.println("===== Employee Management System =====");
+            System.out.println("===== Employee and Salary Management System =====");
             int choice;
             
             do {
@@ -19,6 +22,9 @@ public class App {
                 System.out.println("4. Edit Employee");
                 System.out.println("5. Delete Employee");
                 System.out.println("6. List All Employees");
+                System.out.println("7. Add Salary Record");
+                System.out.println("8. Get Employee Salary");
+                System.out.println("9. List All Salaries");
                 System.out.println("0. Exit");
                 
                 System.out.print("Enter your choice: ");
@@ -129,6 +135,44 @@ public class App {
                                         ", Address: " + emp.getAdresse() + ", Phone: " + emp.getNumTel());
                             }
                         }
+                    }
+                    case 7 -> {
+                        // Add salary record
+                        System.out.print("Enter Employee ID for Salary: ");
+                        int empId = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+
+                        employe emp = empManager.searchEmploye(empId);
+                        if (emp != null) {
+                            System.out.print("Enter Number of Hours Worked: ");
+                            int hoursWorked = scanner.nextInt();
+                            System.out.print("Enter Hourly Rate: ");
+                            double hourlyRate = scanner.nextDouble();
+                            double salaryBrute = hourlyRate * hoursWorked;
+                            double salaryNet = salaryBrute * (1 - 0.2); // applying tax
+                            
+                            ficheSalaire salaryRecord = new ficheSalaire(emp, hoursWorked, salaryBrute, salaryNet, hourlyRate);
+                            salaryManager.getSalary(salaryRecord);
+                            
+                            System.out.println("Salary record added for " + emp.getNom() + " " + emp.getPrenom());
+                        } else {
+                            System.out.println("Employee not found.");
+                        }
+                    }
+                    case 8 -> {
+                        // Get salary
+                        System.out.print("Enter Employee ID for Salary: ");
+                        int empId = scanner.nextInt();
+                        scanner.nextLine();
+                        employe emp = empManager.searchEmploye(empId);
+                        if (emp != null) {
+                            ficheSalaire salary = salaryManagement.getSalary();
+                            System.out.println("Salary for " + emp.getNom() + ": " + salary);
+                        }
+                    }
+                    case 9 -> {
+                        // List all salaries
+                        System.out.println("Listing all salaries...");
                     }
                     case 0 -> System.out.println("Exiting Employee Management System. Goodbye!");
                     default -> System.out.println("Invalid choice. Please try again.");
