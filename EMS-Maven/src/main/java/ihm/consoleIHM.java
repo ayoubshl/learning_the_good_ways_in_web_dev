@@ -80,6 +80,8 @@ public class consoleIHM {
             int hoursWorked = Integer.parseInt(scanner.nextLine());
 
             salary newSalary = new salary(0, wagePerHour, hoursWorked, newEmployee);
+            newSalary.setDate(java.time.LocalDate.now().toString()); // Set today's date
+
             boolean salaryAdded = salaryManager.addSalary(newSalary);
 
             if (salaryAdded) {
@@ -232,6 +234,8 @@ public class consoleIHM {
             int hoursWorked = Integer.parseInt(scanner.nextLine());
 
             salary newSalary = new salary(0, wagePerHour, hoursWorked, emp);
+            newSalary.setDate(java.time.LocalDate.now().toString()); // Set today's date
+
             boolean salaryAdded = salaryManager.addSalary(newSalary);
 
             if (salaryAdded) {

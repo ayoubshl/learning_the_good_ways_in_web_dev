@@ -18,14 +18,13 @@ public class jdbcSalaryHandler implements salaryRepository {
 
     @Override
     public boolean addSalary(salary salary) {
-        String sql = "INSERT INTO salaries (employee_id, date, hours_worked, wage_per_hour, gross_salary, net_salary) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO salaries (employee_id, date, hours_worked, wage_per_hour) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, salary.getE().getEmployee_id());
             stmt.setString(2, salary.getDate());
             stmt.setInt(3, salary.getHours());
             stmt.setFloat(4, salary.getTax_per_hour());
-            stmt.setFloat(5, salary.getGross_salary());
-            stmt.setFloat(6, salary.getNet_salary());
+
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows > 0) {
@@ -88,20 +87,40 @@ public class jdbcSalaryHandler implements salaryRepository {
     @Override
     public List<salary> getAllSalaries() {
         List<salary> salaries = new ArrayList<>();
-        String sql = "SELECT * FROM salaries";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            ResultSet rs = stmt.executeQuery();
+        String sql = "SELECT s.id AS salary_id, s.employee_id, s.date, s.hours_worked, s.wage_per_hour, " +
+                "s.gross_salary, s.net_salary, e.name, e.address, e.phone, e.email " +
+                "FROM salaries s " +
+                "JOIN employees e ON s.employee_id = e.id";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
-                salaries.add(new salary(
-                        rs.getInt("id"),
+                employee emp = new employee(
+                        rs.getInt("employee_id"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("email")
+                );
+
+                salary sal = new salary(
+                        rs.getInt("salary_id"),
                         rs.getFloat("wage_per_hour"),
                         rs.getInt("hours_worked"),
-                        null // Assuming the `employee` object is not needed here
-                ));
+                        emp
+                );
+                sal.setGross_salary(rs.getFloat("gross_salary"));
+                sal.setNet_salary(rs.getFloat("net_salary"));
+                sal.setDate(rs.getString("date"));
+
+                salaries.add(sal);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return salaries;
     }
+
 }
