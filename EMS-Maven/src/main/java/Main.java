@@ -9,18 +9,21 @@ import repositoryHandler.jdbcSalaryHandler;
 public class Main {
     public static void main(String[] args) {
         // Initialize managers
-        salaryRepository salaryRepository = new arrayListSalaryHandler();
-        employeeRepository employeeRepository = new arrayListEmployeHandler();
-//        salaryRepository salaryRepository = new jdbcSalaryHandler();
-//        employeeRepository employeeRepository = new jdbcEmployeHandler();
+//        salaryRepository salaryRepository = new arrayListSalaryHandler();
+//        employeeRepository employeeRepository = new arrayListEmployeHandler();
+        salaryRepository salaryRepository = new jdbcSalaryHandler();
+        employeeRepository employeeRepository = new jdbcEmployeHandler();
         EmployeManager employeManager = new EmployeManager(employeeRepository);
         SalaryManager salaryManager = new SalaryManager(salaryRepository);
 
-        // Initialize consoleIHM with managers
-        consoleIHM console = new consoleIHM(employeManager, salaryManager);
+//        // Initialize consoleIHM with managers
+//        consoleIHM ihm = new consoleIHM(employeManager, salaryManager);
+//
+//        // Start the console interface
+//        ihm.start();
 
-        // Start the console interface
-        console.start();
+        swingIHM ihm = new swingIHM(employeManager, salaryManager);
+        ihm.setVisible(true);
     }
 
 }

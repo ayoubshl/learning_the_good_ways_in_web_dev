@@ -81,14 +81,17 @@ public class jdbcEmployeHandler implements employeeRepository {
             stmt.setString(3, emp.getPhone());
             stmt.setString(4, emp.getEmail());
             stmt.setInt(5, emp.getEmployee_id());
-            if (stmt.executeUpdate() > 0) {
-                return emp;
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                return emp; // Return the updated employee object
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; // Return null if the update fails
     }
+
 
     @Override
     public List<employee> getAllEmployees() {
