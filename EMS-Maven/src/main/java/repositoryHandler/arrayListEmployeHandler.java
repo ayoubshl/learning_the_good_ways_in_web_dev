@@ -8,15 +8,17 @@ import java.util.List;
 
 public class arrayListEmployeHandler implements employeeRepository {
     private final List<employee> employees = new ArrayList<>();
+    private int nextId = 1; // To manage auto-increment for the ID field
 
     @Override
     public boolean addEmployee(employee emp) {
+        emp.setEmployee_id(nextId++); // Assign and increment ID
         return employees.add(emp);
     }
 
     @Override
     public boolean removeEmployee(employee emp) {
-        return employees.remove(emp);
+        return employees.removeIf(e -> e.getEmployee_id() == emp.getEmployee_id());
     }
 
     @Override
@@ -36,5 +38,10 @@ public class arrayListEmployeHandler implements employeeRepository {
             }
         }
         return null; // If the employee is not found, return null
+    }
+
+    @Override
+    public List<employee> getAllEmployees() {
+        return new ArrayList<>(employees); // Return a copy of the list to avoid external modifications
     }
 }

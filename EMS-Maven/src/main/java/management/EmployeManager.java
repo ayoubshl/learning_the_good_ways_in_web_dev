@@ -2,6 +2,7 @@ package management;
 
 import models.employee;
 import repository.employeeRepository;
+import java.util.List;
 
 public class EmployeManager {
     private final employeeRepository repository;
@@ -24,5 +25,9 @@ public class EmployeManager {
 
     public employee editEmployee(employee emp) {
         return repository.updateEmployee(emp);
+    }
+
+    public List<employee> getAllEmployees() {
+        return repository.getAllEmployees();
     }
 }
