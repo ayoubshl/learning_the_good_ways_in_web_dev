@@ -85,13 +85,16 @@ public class swingIHM extends JFrame {
 
     private void openAddEmployeeDialog() {
         JFrame addEmployeeFrame = new JFrame("Add Employee");
-        addEmployeeFrame.setSize(400, 300);
-        addEmployeeFrame.setLayout(new GridLayout(5, 2, 10, 10));
+        addEmployeeFrame.setSize(400, 400);
+        addEmployeeFrame.setLayout(new GridLayout(7, 2, 10, 10));
 
         JTextField nameField = new JTextField();
         JTextField addressField = new JTextField();
         JTextField phoneField = new JTextField();
         JTextField emailField = new JTextField();
+        JTextField wageField = new JTextField();
+        JTextField hoursWorkedField = new JTextField();
+
         JButton submitButton = new JButton("Add Employee");
 
         addEmployeeFrame.add(new JLabel("Name:"));
@@ -102,28 +105,57 @@ public class swingIHM extends JFrame {
         addEmployeeFrame.add(phoneField);
         addEmployeeFrame.add(new JLabel("Email:"));
         addEmployeeFrame.add(emailField);
+        addEmployeeFrame.add(new JLabel("Wage per Hour:"));
+        addEmployeeFrame.add(wageField);
+        addEmployeeFrame.add(new JLabel("Hours Worked:"));
+        addEmployeeFrame.add(hoursWorkedField);
         addEmployeeFrame.add(submitButton);
 
         submitButton.addActionListener(e -> {
-            String name = nameField.getText();
-            String address = addressField.getText();
-            String phone = phoneField.getText();
-            String email = emailField.getText();
+            try {
+                String name = nameField.getText();
+                String address = addressField.getText();
+                String phone = phoneField.getText();
+                String email = emailField.getText();
 
-            employee newEmployee = new employee(0, name, address, phone, email);
-            boolean added = employeeManager.addEmployee(newEmployee);
+                if (name.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Please fill in all employee details.");
+                    return;
+                }
 
-            if (added) {
-                JOptionPane.showMessageDialog(this, "Employee added successfully.");
-                addEmployeeFrame.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to add employee.");
+                employee newEmployee = new employee(0, name, address, phone, email);
+                boolean added = employeeManager.addEmployee(newEmployee);
+
+                if (!added) {
+                    JOptionPane.showMessageDialog(this, "Failed to add employee.");
+                    return;
+                }
+
+                float wagePerHour = Float.parseFloat(wageField.getText());
+                int hoursWorked = Integer.parseInt(hoursWorkedField.getText());
+
+                if (wagePerHour <= 0 || hoursWorked <= 0) {
+                    JOptionPane.showMessageDialog(this, "Wage and hours worked must be positive numbers.");
+                    return;
+                }
+
+                salary newSalary = new salary(0, wagePerHour, hoursWorked, newEmployee);
+                newSalary.setDate(java.time.LocalDate.now().toString());
+                boolean salaryAdded = salaryManager.addSalary(newSalary);
+
+                if (salaryAdded) {
+                    JOptionPane.showMessageDialog(this, "Employee and Salary added successfully.");
+                    addEmployeeFrame.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to add salary.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid input. Ensure wage and hours are correct numbers.");
             }
         });
 
         addEmployeeFrame.setVisible(true);
     }
-
     private void displayAllEmployees() {
         List<employee> employees = employeeManager.getAllEmployees();
         JFrame displayFrame = new JFrame("Employee List");
@@ -131,13 +163,23 @@ public class swingIHM extends JFrame {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
 
-        for (employee emp : employees) {
-            textArea.append(emp.getEmployee_id() + " - " + emp.getName() + "\n");
+        if (employees.isEmpty()) {
+            textArea.append("No employees found.\n");
+        } else {
+            for (employee emp : employees) {
+                textArea.append("ID: " + emp.getEmployee_id() + "\n");
+                textArea.append("Name: " + emp.getName() + "\n");
+                textArea.append("Address: " + emp.getAddress() + "\n");
+                textArea.append("Phone: " + emp.getPhone() + "\n");
+                textArea.append("Email: " + emp.getEmail() + "\n");
+                textArea.append("-------------------------------------\n");
+            }
         }
 
         displayFrame.add(new JScrollPane(textArea));
         displayFrame.setVisible(true);
     }
+
 
     private void openEditEmployeeDialog() {
         JFrame editEmployeeFrame = new JFrame("Edit Employee");
@@ -221,18 +263,22 @@ public class swingIHM extends JFrame {
         removeEmployeeFrame.add(removeButton);
 
         removeButton.addActionListener(e -> {
-            int id = Integer.parseInt(idField.getText());
-            employee emp = employeeManager.findEmployeeById(id);
-            if (emp != null) {
-                boolean removed = employeeManager.removeEmployee(emp);
-                if (removed) {
-                    JOptionPane.showMessageDialog(this, "Employee removed successfully.");
-                    removeEmployeeFrame.dispose();
+            try {
+                int id = Integer.parseInt(idField.getText());
+                employee emp = employeeManager.findEmployeeById(id);
+                if (emp != null) {
+                    boolean removed = employeeManager.removeEmployee(emp);
+                    if (removed) {
+                        JOptionPane.showMessageDialog(this, "Employee removed successfully.");
+                        removeEmployeeFrame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to remove employee.");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to remove employee.");
+                    JOptionPane.showMessageDialog(this, "Employee not found.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Employee not found.");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid ID format.");
             }
         });
 
@@ -240,7 +286,48 @@ public class swingIHM extends JFrame {
     }
 
     private void openAddSalaryDialog() {
-        // Implement dialog to add salary for an employee
+        JFrame addSalaryFrame = new JFrame("Add Salary");
+        addSalaryFrame.setSize(400, 300);
+        addSalaryFrame.setLayout(new GridLayout(4, 2, 10, 10));
+
+        JTextField employeeIdField = new JTextField();
+        JTextField wageField = new JTextField();
+        JTextField hoursWorkedField = new JTextField();
+        JButton addButton = new JButton("Add Salary");
+
+        addSalaryFrame.add(new JLabel("Employee ID:"));
+        addSalaryFrame.add(employeeIdField);
+        addSalaryFrame.add(new JLabel("Wage per Hour:"));
+        addSalaryFrame.add(wageField);
+        addSalaryFrame.add(new JLabel("Hours Worked:"));
+        addSalaryFrame.add(hoursWorkedField);
+        addSalaryFrame.add(addButton);
+
+        addButton.addActionListener(e -> {
+            try {
+                int employeeId = Integer.parseInt(employeeIdField.getText());
+                float wage = Float.parseFloat(wageField.getText());
+                int hoursWorked = Integer.parseInt(hoursWorkedField.getText());
+
+                employee emp = employeeManager.findEmployeeById(employeeId);
+                if (emp != null) {
+                    salary newSalary = new salary(0, wage, hoursWorked, emp);
+                    boolean added = salaryManager.addSalary(newSalary);
+                    if (added) {
+                        JOptionPane.showMessageDialog(this, "Salary added successfully.");
+                        addSalaryFrame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to add salary.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Employee not found.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid input.");
+            }
+        });
+
+        addSalaryFrame.setVisible(true);
     }
 
     private void displayAllSalaries() {
@@ -250,14 +337,26 @@ public class swingIHM extends JFrame {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
 
-        for (salary sal : salaries) {
-            textArea.append("Salary ID: " + sal.getSalary_id() + ", Employee ID: " + sal.getE().getEmployee_id()
-                    + ", Net Salary: " + sal.getNet_salary() + "\n");
+        if (salaries.isEmpty()) {
+            textArea.append("No salaries found.\n");
+        } else {
+            for (salary sal : salaries) {
+                textArea.append("Salary ID: " + sal.getSalary_id() + "\n");
+                textArea.append("Employee ID: " + sal.getE().getEmployee_id() + "\n");
+                textArea.append("Employee Name: " + sal.getE().getName() + "\n");
+                textArea.append("Date: " + sal.getDate() + "\n");
+                textArea.append("Hours Worked: " + sal.getHours() + "\n");
+                textArea.append("Wage per Hour: " + sal.getTax_per_hour() + "\n");
+                textArea.append("Gross Salary: " + sal.getGross_salary() + "\n");
+                textArea.append("Net Salary: " + sal.getNet_salary() + "\n");
+                textArea.append("-------------------------------------\n");
+            }
         }
 
         displayFrame.add(new JScrollPane(textArea));
         displayFrame.setVisible(true);
     }
+
 
     private void openAddRewardDialog() {
         JFrame rewardFrame = new JFrame("Add Reward");
@@ -278,21 +377,21 @@ public class swingIHM extends JFrame {
         rewardFrame.add(addRewardButton);
 
         addRewardButton.addActionListener(e -> {
-            int id = Integer.parseInt(employeeIdField.getText());
-            employee emp = employeeManager.findEmployeeById(id);
-
-            if (emp != null) {
+            try {
+                int id = Integer.parseInt(employeeIdField.getText());
                 float reward = Float.parseFloat(rewardField.getText());
                 String date = dateField.getText();
-                boolean result = salaryManager.addReward(emp, reward, date);
-                if (result) {
-                    JOptionPane.showMessageDialog(this, "Reward added successfully.");
+
+                employee emp = employeeManager.findEmployeeById(id);
+                if (emp != null) {
+                    boolean result = salaryManager.addReward(emp, reward, date);
+                    JOptionPane.showMessageDialog(this, result ? "Reward added successfully." : "Failed to add reward.");
                     rewardFrame.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to add reward.");
+                    JOptionPane.showMessageDialog(this, "Employee not found.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Employee not found.");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid input.");
             }
         });
 
@@ -318,24 +417,25 @@ public class swingIHM extends JFrame {
         penaltyFrame.add(applyPenaltyButton);
 
         applyPenaltyButton.addActionListener(e -> {
-            int id = Integer.parseInt(employeeIdField.getText());
-            employee emp = employeeManager.findEmployeeById(id);
-
-            if (emp != null) {
+            try {
+                int id = Integer.parseInt(employeeIdField.getText());
                 float penalty = Float.parseFloat(penaltyField.getText());
                 String date = dateField.getText();
-                boolean result = salaryManager.applyPenalty(emp, penalty, date);
-                if (result) {
-                    JOptionPane.showMessageDialog(this, "Penalty applied successfully.");
+
+                employee emp = employeeManager.findEmployeeById(id);
+                if (emp != null) {
+                    boolean result = salaryManager.applyPenalty(emp, penalty, date);
+                    JOptionPane.showMessageDialog(this, result ? "Penalty applied successfully." : "Failed to apply penalty.");
                     penaltyFrame.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to apply penalty.");
+                    JOptionPane.showMessageDialog(this, "Employee not found.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Employee not found.");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid input.");
             }
         });
 
         penaltyFrame.setVisible(true);
     }
+
 }
