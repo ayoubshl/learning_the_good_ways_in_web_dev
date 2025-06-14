@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mettre à jour une Fiche de Salaire</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="col-md-6 offset-md-3 mt-5">
+  <div class="card-dark shadow-lg">
+    <div class="card-header d-flex justify-content-center align-items-center">
+      <h3 class="mb-0">
+        <i class="fas fa-edit icon"></i> Mettre à jour une Fiche de Salaire
+      </h3>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()">
+        <!-- Date Fin -->
+        <div class="form-group mb-3">
+          <label for="dateFin" class="form-label"><strong><i class="fas fa-calendar"></i> Date Fin</strong></label>
+          <input type="date" class="form-control" id="dateFin"
+                 [(ngModel)]="fiche.dateFin" name="dateFin" required>
+        </div>
+
+        <!-- Nombre d'Heures -->
+        <div class="form-group mb-3">
+          <label for="nbHeures" class="form-label"><strong><i class="fas fa-clock"></i> Nombre d'Heures</strong></label>
+          <input type="number" class="form-control" id="nbHeures"
+                 placeholder="Entrez le nombre d'heures"
+                 [(ngModel)]="fiche.nbHeures" name="nbHeures" required>
+        </div>
+
+        <!-- Taux Horaire -->
+        <div class="form-group mb-3">
+          <label for="tauxHoraires" class="form-label"><strong><i class="fas fa-dollar-sign"></i> Taux Horaire</strong></label>
+          <input type="number" class="form-control" id="tauxHoraires"
+                 placeholder="Entrez le taux horaire"
+                 [(ngModel)]="fiche.tauxHoraires" name="tauxHoraires" required>
+        </div>
+
+        <!-- Tax -->
+        <div class="form-group mb-3">
+          <label for="tax" class="form-label"><strong><i class="fas fa-percentage"></i> Tax</strong></label>
+          <input type="number" class="form-control" id="tax"
+                 placeholder="Entrez la taxe (%)"
+                 [(ngModel)]="fiche.tax" name="tax" required>
+        </div>
+
+        <!-- Montant Brut -->
+        <div class="form-group mb-3">
+          <label for="montantBrut" class="form-label"><strong><i class="fas fa-money-bill"></i> Montant Brut</strong></label>
+          <input type="number" class="form-control" id="montantBrut"
+                 placeholder="Montant brut"
+                 [(ngModel)]="fiche.montantBrut" name="montantBrut" required>
+        </div>
+
+        <!-- Montant Net -->
+        <div class="form-group mb-3">
+          <label for="montantNet" class="form-label"><strong><i class="fas fa-money-bill-wave"></i> Montant Net</strong></label>
+          <input type="number" class="form-control" id="montantNet"
+                 placeholder="Montant net"
+                 [(ngModel)]="fiche.montantNet" name="montantNet" required>
+        </div>
+
+        <!-- Matricule -->
+        <div class="form-group mb-3">
+          <label for="matricule" class="form-label"><strong><i class="fas fa-user"></i> Matricule</strong></label>
+          <input type="number" class="form-control" id="matricule"
+                 placeholder="Matricule de l'employé"
+                 [(ngModel)]="fiche.matricule" name="matricule" required>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn-dark-success w-45">
+            <i class="fas fa-check-circle"></i> Soumettre
+          </button>
+          <button type="button" class="btn-dark-secondary w-45" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> Retour
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

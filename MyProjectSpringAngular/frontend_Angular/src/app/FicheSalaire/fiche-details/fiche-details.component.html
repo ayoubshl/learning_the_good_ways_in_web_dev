@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Détails de la Fiche de Salaire</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="col-md-6 offset-md-3 mt-5">
+  <div class="card-dark shadow-lg">
+    <div class="card-header d-flex justify-content-center align-items-center">
+      <h3 class="mb-0">
+        <i class="fas fa-file-invoice-dollar icon"></i> Détails de la Fiche de Salaire
+      </h3>
+    </div>
+    <div class="card-body">
+      <ul class="details-list">
+        <li><strong><i class="fas fa-id-card"></i> Numéro:</strong> {{ fiche?.nFiche }}</li>
+        <li><strong><i class="fas fa-calendar"></i> Date Fin:</strong> {{ fiche?.dateFin }}</li>
+        <li><strong><i class="fas fa-clock"></i> Heures:</strong> {{ fiche?.nbHeures }}</li>
+        <li><strong><i class="fas fa-dollar-sign"></i> Montant Brut:</strong> {{ fiche?.montantBrut }}</li>
+        <li><strong><i class="fas fa-percentage"></i> Tax:</strong> {{ fiche?.tax }}%</li>
+        <li><strong><i class="fas fa-money-bill"></i> Montant Net:</strong> {{ fiche?.montantNet }}</li>
+        <li><strong><i class="fas fa-user"></i> Employé Matricule:</strong> {{ fiche?.matricule }}</li>
+      </ul>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="card-footer d-flex justify-content-between">
+      <button (click)="goBack()" class="btn-dark-secondary">
+        <i class="fas fa-arrow-left"></i> Retour
+      </button>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

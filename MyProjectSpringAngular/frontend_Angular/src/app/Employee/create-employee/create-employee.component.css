@@ -1,0 +1,137 @@
+/* Global dark theme */
+body {
+  background-color: #000; /* Pure black background */
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container with margin */
+.container {
+  width: 100%;
+  max-width: 800px; /* Increase max-width for a wider card */
+  margin-top: 50px; /* Add margin at the top */
+  padding: 20px;
+}
+
+/* Dark themed card */
+.card-dark {
+  background-color: #111; /* Dark grey */
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  color: #ddd;
+  margin: 20px auto; /* Ensure some space around the card */
+  width: 100%;
+}
+
+/* Card Header with added margin */
+.card-header {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #fff;
+  padding: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 20px; /* Add margin below the header */
+}
+
+.card-header i {
+  margin-right: 8px;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #b0c4de; /* Subtle blue-grey */
+}
+
+.form-label i {
+  margin-right: 10px;
+  color: #3b82f6; /* Blue icons */
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border: 1px solid #3b82f6;
+  box-shadow: 0px 0px 8px rgba(59, 130, 246, 0.6);
+}
+
+/* Buttons */
+.btn-dark-lg,
+.btn-dark-secondary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-dark-lg {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  box-shadow: 0px 3px 10px rgba(59, 130, 246, 0.4);
+}
+
+.btn-dark-lg:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(59, 130, 246, 0.6);
+}
+
+.btn-dark-secondary {
+  background-color: #444;
+  color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.btn-dark-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .card-dark {
+    width: 95%; /* Slightly narrower on small screens */
+  }
+
+  .btn-dark-lg,
+  .btn-dark-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

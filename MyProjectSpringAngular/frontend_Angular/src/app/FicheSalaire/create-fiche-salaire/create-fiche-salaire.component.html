@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Salary Slip</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="container mt-5">
+  <!-- Page Title -->
+  <h2 class="text-center mb-4 text-light">
+    <i class="fas fa-file-invoice-dollar"></i> Créer une Fiche de Salaire
+  </h2>
+
+  <!-- Form Card -->
+  <div class="card-dark shadow-lg p-4">
+    <form (ngSubmit)="onSubmit()">
+      <!-- Date Field -->
+      <div class="form-group mb-3">
+        <label for="dateFin"><i class="fas fa-calendar-alt"></i> Date Fin</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dateFin"
+          [(ngModel)]="ficheSalaire.dateFin"
+          name="dateFin"
+          required
+        />
+      </div>
+
+      <!-- Matricule -->
+      <div class="form-group mb-3">
+        <label for="matricule"><i class="fas fa-id-card"></i> Matricule</label>
+        <input
+          type="text"
+          class="form-control"
+          id="matricule"
+          [(ngModel)]="ficheSalaire.matricule"
+          name="matricule"
+          required
+        />
+      </div>
+
+      <!-- Number of Hours -->
+      <div class="form-group mb-3">
+        <label for="nbHeures"><i class="fas fa-clock"></i> Nombre d'Heures</label>
+        <input
+          type="number"
+          class="form-control"
+          id="nbHeures"
+          [(ngModel)]="ficheSalaire.nbHeures"
+          name="nbHeures"
+          required
+        />
+      </div>
+
+      <!-- Hourly Rate -->
+      <div class="form-group mb-3">
+        <label for="tauxHoraires"><i class="fas fa-dollar-sign"></i> Taux Horaire</label>
+        <input
+          type="number"
+          class="form-control"
+          id="tauxHoraires"
+          [(ngModel)]="ficheSalaire.tauxHoraires"
+          name="tauxHoraires"
+          required
+        />
+      </div>
+
+      <!-- Tax -->
+      <div class="form-group mb-4">
+        <label for="tax"><i class="fas fa-percentage"></i> Tax</label>
+        <input
+          type="number"
+          class="form-control"
+          id="tax"
+          [(ngModel)]="ficheSalaire.tax"
+          name="tax"
+          required
+        />
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-center gap-3">
+        <button type="submit" class="btn btn-dark-submit">
+          <i class="fas fa-paper-plane"></i> Soumettre
+        </button>
+        <button type="button" class="btn btn-dark-secondary" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i> Retour
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

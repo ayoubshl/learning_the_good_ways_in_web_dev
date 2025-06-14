@@ -1,0 +1,106 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Full-Page Styling */
+html, body {
+  background-color: #000; /* Black background */
+  color: #fff;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Menu Container */
+.menu-container {
+  text-align: center;
+  background-color: #111; /* Dark card background */
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.9);
+  max-width: 500px;
+  width: 90%;
+  margin: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Page Title */
+.menu-container h2 {
+  color: #4da6ff; /* Blueish color for title */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Icons */
+.icon {
+  color: #4da6ff; /* Light blue icons */
+  margin-right: 10px;
+}
+
+/* Menu Options */
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Buttons */
+.menu-button {
+  background-color: #222; /* Slightly lighter than card background */
+  color: #4da6ff;
+  border: 1px solid #4da6ff;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  background-color: #4da6ff; /* Highlight on hover */
+  color: #000; /* Change button text color to black */
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(77, 166, 255, 0.6);
+}
+
+/* Reverse icon color on hover */
+.menu-button:hover .icon {
+  color: #000; /* Set icon color to black */
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-container {
+    padding: 20px;
+  }
+
+  .menu-button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+  }
+}

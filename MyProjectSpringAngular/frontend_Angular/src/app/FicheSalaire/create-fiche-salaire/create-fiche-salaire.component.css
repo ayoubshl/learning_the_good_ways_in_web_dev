@@ -1,0 +1,103 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Full-Page Background */
+html, body {
+  background-color: #000; /* Pitch black background */
+  color: #fff;
+  height: 100%;
+}
+
+/* Root Container */
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Page Title */
+h2 {
+  color: #4da6ff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Card Style */
+.card-dark {
+  background-color: #111;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.form-control {
+  background-color: #222;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #4da6ff;
+  box-shadow: 0 0 8px rgba(77, 166, 255, 0.5);
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-dark-submit {
+  background-color: #4da6ff;
+  color: #fff;
+}
+
+.btn-dark-submit:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(77, 166, 255, 0.6);
+}
+
+.btn-dark-secondary {
+  background-color: #444;
+  color: #fff;
+}
+
+.btn-dark-secondary:hover {
+  background-color: #555;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+
+/* Icons - Blueish Color */
+i {
+  color: #4da6ff; /* Light blue for icons */
+  margin-right: 5px;
+}

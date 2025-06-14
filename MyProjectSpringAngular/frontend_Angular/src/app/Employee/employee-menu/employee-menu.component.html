@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Employés</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="menu-container">
+  <!-- Page Title -->
+  <h2 class="text-center">
+    <i class="fas fa-users icon"></i> Gestion des Employés
+  </h2>
+
+  <!-- Menu Options -->
+  <div class="menu-options">
+    <!-- Ajouter un Employé -->
+    <button class="menu-button" (click)="navigateToAddEmployee()">
+      <i class="fas fa-user-plus icon"></i> Ajouter un Employé
+    </button>
+
+    <!-- Lister les Employés -->
+    <button class="menu-button" (click)="navigateToListEmployees()">
+      <i class="fas fa-list icon"></i> Lister les Employés
+    </button>
+
+    <!-- Retour Button -->
+    <button class="menu-button" (click)="goToMenu()">
+      <i class="fas fa-arrow-left icon"></i> Retour
+    </button>
+  </div>
+</div>
+</body>
+</html>

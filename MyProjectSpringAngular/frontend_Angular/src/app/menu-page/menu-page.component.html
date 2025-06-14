@@ -1,0 +1,53 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Employés</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="menu-container">
+  <!-- Déconnexion Button at the Top Right -->
+  <div class="top-right-logout">
+    <button class="btn-dark logout-button" (click)="deconnecter()">
+      <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Employee Management Card -->
+    <div class="card-dark">
+      <div class="icon-container">
+        <i class="fas fa-users"></i>
+      </div>
+      <h4>Gestion des employés</h4>
+      <p>Ajoutez, supprimez et éditez vos employés facilement.</p>
+      <button class="btn-dark" [routerLink]="['/employee-menu']">
+        Gérer les Employés
+      </button>
+    </div>
+
+    <!-- Payroll Management Card -->
+    <div class="card-dark">
+      <div class="icon-container">
+        <i class="fas fa-file-invoice-dollar"></i>
+      </div>
+      <h4>Gestion des fiches de salaire</h4>
+      <p>Créez et gérez les fiches de salaire pour vos employés facilement.</p>
+      <button class="btn-dark" routerLink="/salaire-menu">
+        Gérer les Fiches
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

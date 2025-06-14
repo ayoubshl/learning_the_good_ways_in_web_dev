@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liste des Fiches de Salaire</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<!-- Root Container -->
+<div class="container mt-5">
+  <!-- Page Title -->
+  <h2 class="text-center mb-4">
+    <i class="fas fa-file-invoice-dollar icon"></i> Liste des Fiches de Salaire
+  </h2>
+
+  <!-- Card Container -->
+  <div class="card-dark shadow-lg">
+    <!-- Card Header -->
+
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="fichesTable" class="table table-hover table-bordered">
+          <thead>
+          <tr>
+            <th><i class="fas fa-id-card"></i> Numéro</th>
+            <th><i class="fas fa-calendar"></i> Date Fin</th>
+            <th><i class="fas fa-clock"></i> Heures</th>
+            <th><i class="fas fa-dollar-sign"></i> Montant Brut</th>
+            <th><i class="fas fa-percentage"></i> Tax</th>
+            <th><i class="fas fa-money-bill"></i> Montant Net</th>
+            <th><i class="fas fa-user"></i> Employé</th>
+            <th><i class="fas fa-cogs"></i> Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let fiche of fiches">
+            <td>{{ fiche.nFiche }}</td>
+            <td>{{ fiche.dateFin }}</td>
+            <td>{{ fiche.nbHeures }}</td>
+            <td>{{ fiche.montantBrut }}</td>
+            <td>{{ fiche.tax }}</td>
+            <td>{{ fiche.montantNet }}</td>
+            <td>{{ fiche.matricule }}</td>
+            <td class="text-center">
+              <!-- Buttons for Actions -->
+              <button
+                (click)="updateFiche(fiche.nFiche)"
+                class="btn-action btn-dark-info"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                (click)="deleteFiche(fiche.nFiche)"
+                class="btn-action btn-dark-danger"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+              <button
+                (click)="viewFiche(fiche.nFiche)"
+                class="btn-action btn-dark-success"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card Footer -->
+    <div class="card-footer d-flex justify-content-center">
+      <button (click)="logout()" class="btn-dark-secondary">
+        <i class="fas fa-sign-out-alt"></i> retour
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

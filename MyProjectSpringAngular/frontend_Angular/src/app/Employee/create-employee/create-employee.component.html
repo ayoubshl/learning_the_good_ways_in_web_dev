@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajouter Employee</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card-dark">
+    <!-- Card Header -->
+    <div class="card-header">
+      <h3 class="mb-0 text-center">
+        <i class="fas fa-user-plus"></i> Ajouter Employee
+      </h3>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()">
+        <!-- First Name -->
+        <div class="form-group mb-3">
+          <label for="firstName" class="form-label"
+          ><i class="fas fa-user"></i> Prénom</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            [(ngModel)]="employee.firstName"
+            name="firstName"
+            placeholder="Entrer prénom"
+          />
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group mb-3">
+          <label for="lastName" class="form-label"
+          ><i class="fas fa-user-tag"></i> Nom</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            [(ngModel)]="employee.lastName"
+            name="lastName"
+            placeholder="Entrer nom"
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group mb-3">
+          <label for="adress" class="form-label"
+          ><i class="fas fa-map-marker-alt"></i> Adresse</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="adress"
+            [(ngModel)]="employee.adress"
+            name="adress"
+            placeholder="Entrer adresse"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label for="email" class="form-label"
+          ><i class="fas fa-envelope"></i> Email</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            [(ngModel)]="employee.email"
+            name="email"
+            placeholder="Entrer email"
+          />
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+          <button class="btn-dark-lg" type="submit">
+            <i class="fas fa-save"></i> Enregistrer
+          </button>
+          <button class="btn-dark-secondary" type="button" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> Retour
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

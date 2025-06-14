@@ -1,0 +1,79 @@
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-4/assets/css/login-4.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<body>
+
+<!--form area start-->
+<div class="form">
+  <!--login form start-->
+  <form class="login-form" novalidate #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
+    <i class="fas fa-user-circle"></i>
+    <input
+      class="user-input"
+      type="text"
+      [(ngModel)]="login.email"
+      name="email"
+      placeholder="Entrez votre e-mail"
+      required
+    />
+    <input
+      class="user-input"
+      [attr.type]="showPassword ? 'text' : 'password'"
+      type="password"
+      [(ngModel)]="login.password"
+      name="password"
+      placeholder="Entrez votre mot de passe"
+      required
+      autocomplete="current-password"
+    />
+    <i
+      class="fa"
+      [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="togglePasswordVisibility()"
+      style="position: absolute; top: 47%; right: 10px; transform: translateY(-50%); cursor: pointer;  font-size: 20px;
+"
+    ></i>
+    <div class="options-01" style="display: flex;
+    justify-content: space-around;">
+      <label class="remember-me">
+        <input
+          type="checkbox"
+          [(ngModel)]="login.rememberMe"
+          name="remember"
+        /> Remember me
+      </label>
+    </div>
+    <input class="btn" type="submit" value="Se connecter" />
+  </form>
+  <!--login form end-->
+
+  <!--signup form start-->
+  <form class="signup-form" action="" method="post">
+    <i class="fas fa-user-plus"></i>
+    <input class="user-input" type="text" name="" placeholder="Username" required>
+    <input class="user-input" type="email" name="" placeholder="Email Address" required>
+    <input class="user-input" type="password" name="" placeholder="Password" required>
+    <input class="btn" type="submit" name="" value="SIGN UP">
+    <div class="options-02">
+      <p>Already Registered? <a href="#">Sign In</a></p>
+    </div>
+  </form>
+  <!--signup form end-->
+
+  <br>
+  <br>
+
+</div>
+<!--form area end-->
+
+</body>

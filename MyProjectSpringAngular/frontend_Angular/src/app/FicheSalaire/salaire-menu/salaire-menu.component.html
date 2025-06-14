@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Fiches de Salaire</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+<div class="menu-container">
+  <h2 class="text-center">
+    <i class="fas fa-money-bill-alt icon"></i> Gestion des Fiches de Salaire
+  </h2>
+  <div class="menu-options">
+    <button class="menu-button" [routerLink]="['/createFiche']">
+      <i class="fas fa-plus-circle icon"></i> Créer une Fiche
+    </button>
+    <button class="menu-button" [routerLink]="['/fiches']">
+      <i class="fas fa-list icon"></i> Voir les Fiches
+    </button>
+    <button class="menu-button" (click)="goToMenu()">
+      <i class="fas fa-arrow-left icon"></i> Retour
+    </button>
+
+  </div>
+</div>
+</body>
+</html>

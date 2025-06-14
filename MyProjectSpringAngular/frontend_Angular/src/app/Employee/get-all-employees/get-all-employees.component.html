@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liste des Employés</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  </head>
+<body>
+<!-- Root Container -->
+<div class="container mt-5">
+  <!-- Page Title -->
+  <h2 class="text-center mb-4 text-light">
+    <i class="fas fa-users"></i> Liste des employés
+  </h2>
+
+  <!-- Card Container -->
+  <div class="card-dark shadow-lg">
+    <!-- Card Header -->
+
+
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="employeeTable"
+          class="table table-hover table-bordered"
+          style="width: 100%"
+        >
+          <thead>
+          <tr>
+            <th><i class="fas fa-id-card"></i> Matricule</th>
+            <th><i class="fas fa-user"></i> Prénom</th>
+            <th><i class="fas fa-user-tag"></i> Nom</th>
+            <th><i class="fas fa-map-marker-alt"></i> Adresse</th>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <th><i class="fas fa-cogs"></i> Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let employee of filteredEmployees">
+            <td>{{ employee.matricule }}</td>
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.adress }}</td>
+            <td>{{ employee.email }}</td>
+            <td class="text-center">
+              <button
+                (click)="updateEmployee(employee.matricule)"
+                class="btn-action btn-dark-info"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                (click)="deleteEmployee(employee.matricule)"
+                class="btn-action btn-dark-danger"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+              <button
+                (click)="viewEmployee(employee.matricule)"
+                class="btn-action btn-dark-success"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <button (click)="logout()" class="btn-dark-secondary">
+          <i class="fas fa-sign-out-alt"></i> retour
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
